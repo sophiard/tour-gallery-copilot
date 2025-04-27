@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Gallery from './components/Gallery';
- //import Gallery component
+//import Gallery component
 
 const App = () => {
   const [tours, setTours] = useState([]);
@@ -42,6 +42,18 @@ const App = () => {
   if (error) {
     return <h2>Error: {error}</h2>;
   }   // show an error if there is error
+
+// If no tours are left, show a "Refresh" button to refetch the data
+  if (tours.length === 0) {
+    return (
+      <div>
+        <h2>No Tours Left</h2> {/* shows a message if no tours left */}
+        <button onClick={() => window.location.reload()}>
+          Refresh Tours
+        </button> {/* button that reloads page */}
+      </div>
+    );
+  }
 
   return (
     <div>
