@@ -1,13 +1,16 @@
 // Fetch tours from https://course-api.com/react-tours-project using useEffect
 // Store in state: tours, loading, error
 
+
 import React, { useState, useEffect } from 'react';
 
 const App = () => {
   const [tours, setTours] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  // Setup the tour info
 
+ 
   useEffect(() => {
     const fetchTours = async () => {
       setLoading(true);
@@ -23,19 +26,22 @@ const App = () => {
         setError(err.message);
       } finally {
         setLoading(false);
-      }
+      } // // Get tour data when app starts
     };
 
     fetchTours();
   }, []);
 
+  
   if (loading) {
     return <h2>Loading...</h2>;
-  }
+  } //shows if it is still loading
+
 
   if (error) {
     return <h2>Error: {error}</h2>;
-  }
+  }   // show error if there is error
+
 
   return (
     <div>
@@ -43,10 +49,10 @@ const App = () => {
       <ul>
         {tours.map((tour) => (
           <li key={tour.id}>{tour.name}</li>
-        ))}
+        ))} 
       </ul>
     </div>
-  );
+  );//Show all of the tours tours
 };
 
 export default App;
