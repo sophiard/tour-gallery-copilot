@@ -1,8 +1,9 @@
 // Fetch tours from https://course-api.com/react-tours-project using useEffect
 // Store in state: tours, loading, error
 
-
 import React, { useState, useEffect } from 'react';
+import Gallery from './components/Gallery';
+ //import Gallery component
 
 const App = () => {
   const [tours, setTours] = useState([]);
@@ -10,7 +11,6 @@ const App = () => {
   const [error, setError] = useState(null);
   // Setup the tour info
 
- 
   useEffect(() => {
     const fetchTours = async () => {
       setLoading(true);
@@ -26,33 +26,37 @@ const App = () => {
         setError(err.message);
       } finally {
         setLoading(false);
-      } // // Get tour data when app starts
+      } // Get tour data when app starts
     };
 
     fetchTours();
   }, []);
 
-  
+  // If loading is true, display "Loading..."
+  // If error, display an error message
+  // Else, render Gallery with tour data
   if (loading) {
     return <h2>Loading...</h2>;
   } //shows if it is still loading
 
-
   if (error) {
     return <h2>Error: {error}</h2>;
-  }   // show error if there is error
-
+  }   // show an error if there is error
 
   return (
     <div>
       <h1>Tours</h1>
-      <ul>
-        {tours.map((tour) => (
-          <li key={tour.id}>{tour.name}</li>
-        ))} 
-      </ul>
+      {/* Show Gallery and pass tours data */}
+      <Gallery 
+        tours={tours} 
+        onRemove={(id) => {
+          // created function to remove a tour
+          const newTours = tours.filter(tour => tour.id !== id);
+          setTours(newTours);
+        }} 
+      />
     </div>
-  );//Show all of the tours tours
+  ); //Show all of the tours
 };
 
 export default App;
