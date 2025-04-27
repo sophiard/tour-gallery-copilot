@@ -15,7 +15,7 @@ const App = () => {
     const fetchTours = async () => {
       setLoading(true);
       try {
-        const response = await fetch('https://course-api.com/react-tours-project');
+        const response = await fetch('https://api.allorigins.win/raw?url=https://course-api.com/react-tours-project');
         if (!response.ok) {
           throw new Error('Failed to fetch tours');
         }
@@ -43,7 +43,7 @@ const App = () => {
     return <h2>Error: {error}</h2>;
   }   // show an error if there is error
 
-// If no tours are left, show a "Refresh" button to refetch the data
+  // If no tours are left, show a "Refresh" button to refetch the data
   if (tours.length === 0) {
     return (
       <div>
